@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, ArrowLeft, Quote, Check, Droplets, TreesIcon as Tree, Sprout, FlaskConical, GraduationCap, Search, Package } from "lucide-react";
 import { useState } from "react";
 import LatestNews from "@/components/latest-news";
@@ -76,18 +77,20 @@ function HeroSection() {
             </p>
           </div>
             <div className="relative h-[300px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
-              <img
+              <Image
                 src={HERO_BG}
                 alt="Nepal sustainable agriculture"
-                className="w-full h-full object-cover scale-110"
+                fill
+                className="object-cover scale-110"
+                priority
               />
             <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
           </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-8">
           {homePhotos.map((photo, i) => (
-            <div key={i} className="rounded-xl overflow-hidden aspect-[4/3]">
-              <img src={photo} alt="SADP Nepal" className="w-full h-full object-cover" />
+            <div key={i} className="rounded-xl overflow-hidden aspect-[4/3] relative">
+              <Image src={photo} alt="SADP Nepal" fill className="object-cover" />
             </div>
           ))}
         </div>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Heart, ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { Logo } from "@/components/logo";
 
 const links = [
   { href: "/", label: "Home" },
@@ -39,7 +40,7 @@ export function Nav() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-brand-bg/95 backdrop-blur-md">
       <nav className="flex justify-between items-center w-full px-6 md:px-16 py-4 max-w-[1280px] mx-auto">
         <Link href="/" className="shrink-0 flex items-center gap-3">
-          <img src="/sadpnepal-logo.png" alt="SADP Nepal" className="h-10 w-auto" />
+          <Logo className="h-10 w-auto" />
           <span className="text-brand-primary font-bold text-sm leading-tight">
             SADP<br />Nepal
           </span>
@@ -60,6 +61,11 @@ export function Nav() {
                         ? "text-brand-primary border-b-2 border-brand-blushed-brick pb-1"
                         : "text-brand-on-surface hover:text-brand-blushed-brick"
                     }`}
+                    aria-expanded={volunteerOpen}
+                    aria-haspopup="true"
+                    onKeyDown={(e) => {
+                      if (e.key === "Escape") setVolunteerOpen(false);
+                    }}
                   >
                     {l.label}
                     <ChevronDown className={`size-3 transition-transform ${volunteerOpen ? "rotate-180" : ""}`} />

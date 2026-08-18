@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Leaf, Fish, TreePine, Mountain, Utensils, Rocket, Building, Target, Globe, Lightbulb } from "lucide-react";
 import { CONSERVATION_PHOTOS } from "@/lib/photos";
 
@@ -40,10 +41,12 @@ export default function KGECPPage() {
               </div>
             </div>
             <div className="relative h-[300px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
-              <img
+              <Image
                 src={HERO_BG}
                 alt="Kalikhola Green Economic Corridor"
-                className="w-full h-full object-cover scale-110"
+                fill
+                className="object-cover scale-110"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
             </div>
@@ -73,8 +76,8 @@ export default function KGECPPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
             {inlinePhotos.slice(0, 3).map((photo, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden aspect-[4/3]">
-                <img src={photo} alt="Kalikhola project area" className="w-full h-full object-cover" />
+              <div key={i} className="rounded-2xl overflow-hidden aspect-[4/3] relative">
+                <Image src={photo} alt="Kalikhola project area" fill className="object-cover" />
               </div>
             ))}
           </div>
@@ -123,12 +126,12 @@ export default function KGECPPage() {
             </h2>
             <div className="space-y-6">
               {[
-                { icon: Leaf, title: "Sustainable Agriculture &amp; Agribusiness", desc: "The project promotes organic farming clusters. Backed by research, the project encourages plantation of high value plants that best suit the soil type of every small arable land. It envisions agro-processing industries, branding of local products, and cold storage facilities to enhance market access and reduce post-harvest losses." },
-                { icon: Fish, title: "Fisheries &amp; Aquaculture", desc: "Plans include indigenous fish conservation, community-managed ponds, fish hatcheries, and recreational fishing zones. Riverside restaurants and eco-friendly aquaculture will create new income streams while preserving aquatic biodiversity." },
-                { icon: TreePine, title: "Agroforestry, Forest Economy &amp; Carbon Credit", desc: "The initiative integrates bamboo plantations, fruit trees, medicinal and aromatic plants, beekeeping, and non-timber forest products. Community forestry enterprises will contribute to carbon sequestration, ecosystem restoration, and forest-based livelihoods. Hence, the project ensures negative carbon credit." },
-                { icon: Mountain, title: "River Basin Development &amp; Eco-Tourism", desc: "The Seti River, Kalikhola, Gharmi Khola and Bhalam Khola corridors will be developed as eco-tourism destinations featuring nature trails, bird-watching zones, eco-parks, camping sites, adventure sports like rock-climbing and cultural tourism hubs. River conservation education centers will promote awareness and stewardship among visitors and locals alike." },
-                { icon: Utensils, title: "Hospitality &amp; Tourism Development", desc: "The project encourages farm stays, community homestays, boutique eco-lodges, and farm-to-table restaurants. Cultural performances, wellness tourism, yoga, and meditation centers will strengthen Pokhara's reputation as a holistic tourism destination." },
-                { icon: Rocket, title: "Entrepreneurship &amp; Green Enterprises", desc: "Support will be extended to women's cooperatives, youth startups, agri-tech innovators, and digital marketing platforms. Business incubation centers will nurture local talent and innovation, fostering a new generation of green entrepreneurs." },
+                { icon: Leaf, title: "Sustainable Agriculture & Agribusiness", desc: "The project promotes organic farming clusters. Backed by research, the project encourages plantation of high value plants that best suit the soil type of every small arable land. It envisions agro-processing industries, branding of local products, and cold storage facilities to enhance market access and reduce post-harvest losses." },
+                { icon: Fish, title: "Fisheries & Aquaculture", desc: "Plans include indigenous fish conservation, community-managed ponds, fish hatcheries, and recreational fishing zones. Riverside restaurants and eco-friendly aquaculture will create new income streams while preserving aquatic biodiversity." },
+                { icon: TreePine, title: "Agroforestry, Forest Economy & Carbon Credit", desc: "The initiative integrates bamboo plantations, fruit trees, medicinal and aromatic plants, beekeeping, and non-timber forest products. Community forestry enterprises will contribute to carbon sequestration, ecosystem restoration, and forest-based livelihoods. Hence, the project ensures negative carbon credit." },
+                { icon: Mountain, title: "River Basin Development & Eco-Tourism", desc: "The Seti River, Kalikhola, Gharmi Khola and Bhalam Khola corridors will be developed as eco-tourism destinations featuring nature trails, bird-watching zones, eco-parks, camping sites, adventure sports like rock-climbing and cultural tourism hubs. River conservation education centers will promote awareness and stewardship among visitors and locals alike." },
+                { icon: Utensils, title: "Hospitality & Tourism Development", desc: "The project encourages farm stays, community homestays, boutique eco-lodges, and farm-to-table restaurants. Cultural performances, wellness tourism, yoga, and meditation centers will strengthen Pokhara's reputation as a holistic tourism destination." },
+                { icon: Rocket, title: "Entrepreneurship & Green Enterprises", desc: "Support will be extended to women's cooperatives, youth startups, agri-tech innovators, and digital marketing platforms. Business incubation centers will nurture local talent and innovation, fostering a new generation of green entrepreneurs." },
               ].map((item, i) => {
                 const Icon = item.icon;
                 return (
@@ -138,7 +141,7 @@ export default function KGECPPage() {
                     </div>
                     <div>
                       <h3 className="text-xl font-bold text-brand-primary mb-2">{item.title}</h3>
-                      <p className="text-xl text-brand-on-surface-variant" dangerouslySetInnerHTML={{ __html: item.desc }} />
+                      <p className="text-xl text-brand-on-surface-variant">{item.desc}</p>
                     </div>
                   </div>
                 );
@@ -148,8 +151,8 @@ export default function KGECPPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
             {inlinePhotos.slice(3, 5).map((photo, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden aspect-[16/9]">
-                <img src={photo} alt="Kalikhola project" className="w-full h-full object-cover" />
+              <div key={i} className="rounded-2xl overflow-hidden aspect-[16/9] relative">
+                <Image src={photo} alt="Kalikhola project" fill className="object-cover" />
               </div>
             ))}
           </div>
@@ -279,8 +282,8 @@ export default function KGECPPage() {
                 { title: "Hospitality Training", desc: "Conduct workshops for youth and women, focusing on hygiene, customer service, and hospitality management, thereby enhancing local capacity to host tourists and generate income." },
                 { title: "Entrepreneurship Support", desc: "Mentor local startups, cooperatives, and women's enterprises, while assisting with digital marketing and branding. Particularly impactful for those with expertise in business development and marketing." },
                 { title: "Environmental Education", desc: "Facilitate awareness campaigns, school programs, and river conservation workshops, drawing on teaching, communication, and environmental education skills to inspire stewardship among communities." },
-                { title: "Research &amp; Documentation", desc: "Collect data on biodiversity, water quality, and socio-economic impacts, preparing reports and visuals that inform project monitoring and evaluation. Skills in GIS, data analysis, and research writing are especially valuable." },
-                { title: "Cultural &amp; Creative Engagement", desc: "Document local traditions, crafts, and stories for tourism promotion, using talents in art, media, and storytelling to preserve and showcase the rich cultural heritage of the watershed." },
+                { title: "Research & Documentation", desc: "Collect data on biodiversity, water quality, and socio-economic impacts, preparing reports and visuals that inform project monitoring and evaluation. Skills in GIS, data analysis, and research writing are especially valuable." },
+                { title: "Cultural & Creative Engagement", desc: "Document local traditions, crafts, and stories for tourism promotion, using talents in art, media, and storytelling to preserve and showcase the rich cultural heritage of the watershed." },
               ].map((item, i) => (
                 <div key={i} className="bg-white rounded-xl p-6 border border-brand-outline-variant">
                   <h3 className="text-xl font-bold text-brand-primary mb-2">{item.title}</h3>

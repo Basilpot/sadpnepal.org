@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Target, Eye, Leaf, Sprout, Apple, Store, FlaskConical, Scale, Globe, TreePine, Users, Heart } from "lucide-react";
 import { COMMUNITY_PHOTOS, PEOPLE_PHOTOS, FARMING_PHOTOS } from "@/lib/photos";
 
@@ -42,10 +43,12 @@ export default function About() {
               </div>
             </div>
             <div className="relative h-[300px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
-              <img
+              <Image
                 src={HERO_BG}
-                alt="SADP Nepal"
-                className="w-full h-full object-cover scale-110"
+                alt="SADP Nepal community farming"
+                fill
+                className="object-cover scale-110"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
             </div>
@@ -145,8 +148,8 @@ export default function About() {
         <div className="max-w-[1280px] mx-auto px-6 md:px-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {inlinePhotos.map((photo, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden aspect-[4/3]">
-                <img src={photo} alt="SADP Nepal history" className="w-full h-full object-cover" />
+              <div key={i} className="rounded-2xl overflow-hidden aspect-[4/3] relative">
+                <Image src={photo} alt="SADP Nepal history" fill className="object-cover" />
               </div>
             ))}
           </div>

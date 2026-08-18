@@ -1,6 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Check, Sprout, Users, Tent, Sun, Clock, UtensilsCrossed, GraduationCap, DollarSign } from "lucide-react";
 import { FARMING_PHOTOS } from "@/lib/photos";
+import { InternshipForm } from "@/components/internship-form";
+
+export const metadata: Metadata = {
+  title: "Internship & Training Programs",
+  description:
+    "Hands-on training and a 6-week internship in organic agriculture at GOARC, Pokhara. Learn composting, seed saving, and regenerative farming with SADP Nepal.",
+};
 
 const HERO_IMAGE = FARMING_PHOTOS[12];
 
@@ -35,10 +44,12 @@ export default function InternshipPage() {
               </div>
             </div>
             <div className="relative h-[300px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
-              <img
+              <Image
                 src={HERO_IMAGE}
-                alt="Internship program"
-                className="w-full h-full object-cover scale-110"
+                alt="Internship program at organic farm in Pokhara"
+                fill
+                className="object-cover scale-110"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
             </div>
@@ -226,7 +237,7 @@ export default function InternshipPage() {
                 The remainder of your contribution will be expected on the first day of the internship at SADP either in Nepali currency or US dollars.
               </p>
               <p className="text-xl text-white/90">
-                For SADP Internship Participation, please fill up the Internship form and send by email to <a href="mailto:sadpnepal@gmail.com" className="text-brand-yellow-green font-bold underline">sadpnepal@gmail.com</a>.
+                For SADP Internship Participation, please fill up the Internship form and send by email to <a href="mailto:info@sadpnepal.org" className="text-brand-yellow-green font-bold underline">info@sadpnepal.org</a>.
               </p>
             </div>
           </div>
@@ -248,7 +259,7 @@ export default function InternshipPage() {
               <div className="bg-brand-surface-container rounded-xl p-6">
                 <h3 className="text-xl font-bold text-brand-primary mb-3">Contact</h3>
                 <p className="text-xl text-brand-on-surface-variant">
-                  Email: <a href="mailto:sadpnepal@gmail.com" className="text-brand-primary font-bold underline">sadpnepal@gmail.com</a>
+                  Email: <a href="mailto:info@sadpnepal.org" className="text-brand-primary font-bold underline">info@sadpnepal.org</a>
                 </p>
               </div>
             </div>
@@ -256,64 +267,7 @@ export default function InternshipPage() {
               <h3 className="text-2xl font-bold text-brand-primary mb-6">
                 Send Your Application
               </h3>
-              <form className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label htmlFor="first-name" className="block text-sm font-medium text-brand-on-surface-variant mb-1">
-                      Full Name
-                    </label>
-                    <input
-                      id="first-name"
-                      type="text"
-                      className="w-full border border-brand-outline-variant rounded-lg px-4 py-3 text-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary"
-                      placeholder="Your full name"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-brand-on-surface-variant mb-1">
-                      Email
-                    </label>
-                    <input
-                      id="email"
-                      type="email"
-                      className="w-full border border-brand-outline-variant rounded-lg px-4 py-3 text-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="program" className="block text-sm font-medium text-brand-on-surface-variant mb-1">
-                    Program of Interest
-                  </label>
-                  <select
-                    id="program"
-                    className="w-full border border-brand-outline-variant rounded-lg px-4 py-3 text-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary"
-                  >
-                    <option value="">Select a program</option>
-                    <option value="4-days">4 Days Basic Training</option>
-                    <option value="7-days">7 Days Advanced Training</option>
-                    <option value="15-days">15 Days TOT Program</option>
-                    <option value="internship">6-Week Internship</option>
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-brand-on-surface-variant mb-1">
-                    Your Message
-                  </label>
-                  <textarea
-                    id="message"
-                    rows={4}
-                    className="w-full border border-brand-outline-variant rounded-lg px-4 py-3 text-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary resize-none"
-                    placeholder="Tell us about yourself and your interest..."
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-brand-primary text-white text-sm font-bold px-8 py-3.5 rounded-full shadow-sm hover:bg-brand-primary/90 transition-all duration-200"
-                >
-                  Submit Application
-                </button>
-              </form>
+              <InternshipForm />
             </div>
           </div>
         </div>

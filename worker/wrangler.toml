@@ -1,0 +1,6 @@
+name = "sadp-turnstile-worker"
+main = "src/index.ts"
+compatibility_date = "2026-08-18"
+
+[vars]
+TURNSTILE_SECRET = "0x4AAAAAAETetJ8FG04L2pL7_O1gmZj24vg"

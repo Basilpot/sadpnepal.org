@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { School, Heart, Home, Warehouse } from "lucide-react";
 import { CONSTRUCTION_PHOTOS } from "@/lib/photos";
 
@@ -84,8 +85,8 @@ export default function ConstructionVolunteerPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
             {inlinePhotos.map((photo, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden aspect-[4/3]">
-                <img src={photo} alt="Construction in Nepal" className="w-full h-full object-cover" />
+              <div key={i} className="rounded-2xl overflow-hidden aspect-[4/3] relative">
+                <Image src={photo} alt="Construction in Nepal" fill className="object-cover" />
               </div>
             ))}
           </div>

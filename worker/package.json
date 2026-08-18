@@ -1,0 +1,9 @@
+{
+  "name": "sadp-turnstile-worker",
+  "private": true,
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.0.0",
+    "typescript": "^5.0.0",
+    "wrangler": "^4.0.0"
+  }
+}

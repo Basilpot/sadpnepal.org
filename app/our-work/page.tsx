@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Leaf, Sprout, Sun, TreePine, BookOpen, FlaskConical, Store, Apple } from "lucide-react";
 import { FARMING_PHOTOS, CONSERVATION_PHOTOS, CONSTRUCTION_PHOTOS } from "@/lib/photos";
 
@@ -83,12 +84,12 @@ export default function OurWork() {
               },
               {
                 icon: BookOpen,
-                title: "Farmer Training &amp; Capacity Building",
+                title: "Farmer Training & Capacity Building",
                 body: "Farmer training and capacity building involve strengthening the knowledge, skills, and abilities of farmers to adopt improved agricultural practices and manage their farms more effectively. In Nepal, training programs often focus on organic farming, climate-smart agriculture, pest management, post-harvest handling, entrepreneurship, financial literacy, and market access. Through workshops, field demonstrations, farmer field schools, and exposure visits, farmers gain practical skills that improve productivity, income, and resilience. Capacity building empowers rural communities to make informed decisions, adopt innovations, and become self-reliant. It plays a vital role in promoting sustainable agricultural development and enhancing livelihoods.",
               },
               {
                 icon: FlaskConical,
-                title: "Research &amp; Demonstration Farm",
+                title: "Research & Demonstration Farm",
                 body: "A research and demonstration farm serves as a practical learning center where innovative agricultural technologies, farming methods, and crop varieties are tested, validated, and showcased. In Nepal, these farms help bridge the gap between scientific research and field-level application by providing farmers with hands-on learning opportunities. Demonstration plots allow farmers to observe the benefits of sustainable practices such as organic farming, integrated pest management, agroforestry, and climate-smart agriculture under local conditions. Research and demonstration farms contribute to knowledge generation, technology transfer, and farmer education, supporting the adoption of effective and sustainable agricultural solutions.",
               },
               {
@@ -125,8 +126,8 @@ export default function OurWork() {
         <div className="max-w-[1280px] mx-auto px-6 md:px-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {inlinePhotos.map((photo, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden aspect-[4/3]">
-                <img src={photo} alt="SADP Nepal work" className="w-full h-full object-cover" />
+              <div key={i} className="rounded-2xl overflow-hidden aspect-[4/3] relative">
+                <Image src={photo} alt="SADP Nepal work" fill className="object-cover" />
               </div>
             ))}
           </div>

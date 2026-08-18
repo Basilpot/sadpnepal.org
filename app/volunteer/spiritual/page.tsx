@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Sprout, BookOpen, Brain, Users } from "lucide-react";
 import { SPIRITUAL_PHOTOS } from "@/lib/photos";
 
@@ -113,8 +114,8 @@ export default function SpiritualVolunteerPage() {
         <div className="max-w-[1280px] mx-auto px-6 md:px-16">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {inlinePhotos.map((photo, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden aspect-[4/3]">
-                <img src={photo} alt="Spiritual Nepal" className="w-full h-full object-cover" />
+              <div key={i} className="rounded-2xl overflow-hidden aspect-[4/3] relative">
+                <Image src={photo} alt="Spiritual Nepal" fill className="object-cover" />
               </div>
             ))}
           </div>

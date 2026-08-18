@@ -1,5 +1,13 @@
 import Link from "next/link";
 import { Globe, Mail, Share2 } from "lucide-react";
+import { Logo } from "@/components/logo";
+import { FooterNewsletter } from "@/components/footer-newsletter";
+
+const SOCIAL_LINKS = [
+  { href: "https://www.facebook.com/organicag/", label: "Facebook", icon: Globe },
+  { href: "https://www.linkedin.com/in/sadp-nepal-4b890418/", label: "LinkedIn", icon: Share2 },
+  { href: "https://share.google/hcIt2737RTlDm495k", label: "Google", icon: Globe },
+];
 
 export function Footer() {
   return (
@@ -10,22 +18,13 @@ export function Footer() {
             <h3 className="text-xl font-bold text-white">Stay Connected</h3>
             <p className="text-xl text-white/70 mt-1">Get updates on our programs and impact.</p>
           </div>
-          <div className="flex w-full md:w-auto gap-3">
-            <input
-              type="email"
-              placeholder="Your email address"
-              className="flex-1 md:w-72 px-5 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm focus:outline-none focus:border-white/40"
-            />
-            <button className="px-8 py-3.5 bg-brand-yellow-green text-brand-primary text-sm font-bold rounded-full shadow-sm hover:bg-brand-yellow-green/90 transition-all duration-200 shrink-0">
-              Subscribe
-            </button>
-          </div>
+          <FooterNewsletter />
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-6 md:px-16 py-20 max-w-[1280px] mx-auto">
         <div>
           <div className="flex items-center gap-3 mb-6">
-            <img src="/sadpnepal-logo.png" alt="SADP Nepal" className="h-12 w-auto" />
+            <Logo className="h-12 w-auto" />
             <span className="text-white font-bold text-lg leading-tight">
               SADP<br />Nepal
             </span>
@@ -34,15 +33,25 @@ export function Footer() {
             Pioneering sustainable agriculture and rural empowerment in the heart of the Himalayas since 2002.
           </p>
           <div className="flex gap-4 mt-6">
-            <span className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-brand-yellow-green hover:text-brand-primary transition-colors cursor-pointer">
-              <Globe className="size-4" />
-            </span>
-            <span className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-brand-yellow-green hover:text-brand-primary transition-colors cursor-pointer">
-              <Share2 className="size-4" />
-            </span>
-            <span className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-brand-yellow-green hover:text-brand-primary transition-colors cursor-pointer">
+            {SOCIAL_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.label}
+                className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-brand-yellow-green hover:text-brand-primary transition-colors"
+              >
+                <link.icon className="size-4" />
+              </a>
+            ))}
+            <a
+              href="mailto:info@sadpnepal.org"
+              aria-label="Email us"
+              className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-brand-yellow-green hover:text-brand-primary transition-colors"
+            >
               <Mail className="size-4" />
-            </span>
+            </a>
           </div>
         </div>
         <div>

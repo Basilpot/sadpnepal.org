@@ -1,5 +1,14 @@
+import type { Metadata } from "next";
+import Image from "next/image";
 import { CheckCircle, MapPin, Globe, Users, Tent, GraduationCap } from "lucide-react";
 import { COMMUNITY_PHOTOS } from "@/lib/photos";
+import { VolunteerForm } from "@/components/volunteer-form";
+
+export const metadata: Metadata = {
+  title: "Volunteer in Nepal",
+  description:
+    "Join SADP Nepal as a volunteer — experience Nepali culture while supporting organic farming, community development, and conservation across rural Nepal.",
+};
 
 const HERO_IMAGE = COMMUNITY_PHOTOS[10];
 
@@ -44,10 +53,12 @@ export default function VolunteerPage() {
               </div>
             </div>
             <div className="relative h-[300px] md:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
-              <img
+              <Image
                 src={HERO_IMAGE}
                 alt="Volunteer in Nepal"
-                className="w-full h-full object-cover scale-110"
+                fill
+                className="object-cover scale-110"
+                priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
             </div>
@@ -204,72 +215,9 @@ export default function VolunteerPage() {
             Apply Now
           </h2>
           <p className="text-center text-xl text-brand-on-surface-variant mb-12">
-            Apply via email at <a href="mailto:sadpnepal@gmail.com" className="text-brand-primary font-bold underline">sadpnepal@gmail.com</a> or fill the form below and we will get back to you.
+            Apply via email at <a href="mailto:info@sadpnepal.org" className="text-brand-primary font-bold underline">info@sadpnepal.org</a> or fill the form below and we will get back to you.
           </p>
-          <form className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label htmlFor="fullName" className="block text-sm font-bold uppercase tracking-widest text-brand-on-surface-variant mb-2">
-                  Your Name <span className="text-brand-blushed-brick">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="fullName"
-                  name="fullName"
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-brand-surface-container-low border border-brand-outline-variant text-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-bold uppercase tracking-widest text-brand-on-surface-variant mb-2">
-                  Your Email <span className="text-brand-blushed-brick">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-brand-surface-container-low border border-brand-outline-variant text-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="subject" className="block text-sm font-bold uppercase tracking-widest text-brand-on-surface-variant mb-2">
-                Subject
-              </label>
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                className="w-full px-4 py-3 rounded-lg bg-brand-surface-container-low border border-brand-outline-variant text-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary"
-                placeholder="Volunteer Application"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="message" className="block text-sm font-bold uppercase tracking-widest text-brand-on-surface-variant mb-2">
-                Your Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={5}
-                required
-                className="w-full px-4 py-3 rounded-lg bg-brand-surface-container-low border border-brand-outline-variant text-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary"
-                placeholder="Tell us about yourself and why you want to volunteer..."
-              />
-            </div>
-
-            <div>
-              <button
-                type="submit"
-                className="w-full bg-brand-primary text-white text-sm font-bold px-8 py-3.5 rounded-full shadow-sm hover:bg-brand-primary/90 transition-all duration-200"
-              >
-                Submit Application
-              </button>
-            </div>
-          </form>
+          <VolunteerForm />
         </div>
       </section>
     </>
