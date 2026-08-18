@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { Globe, Mail, Share2 } from "lucide-react";
+import Image from "next/image";
 import { Logo } from "@/components/logo";
 import { FooterNewsletter } from "@/components/footer-newsletter";
 
 const SOCIAL_LINKS = [
-  { href: "https://www.facebook.com/organicag/", label: "Facebook", icon: Globe },
-  { href: "https://www.linkedin.com/in/sadp-nepal-4b890418/", label: "LinkedIn", icon: Share2 },
-  { href: "https://share.google/hcIt2737RTlDm495k", label: "Google", icon: Globe },
+  { href: "https://www.facebook.com/organicag/", label: "Facebook", icon: "/icons/facebook.png" },
+  { href: "https://www.linkedin.com/in/sadp-nepal-4b890418/", label: "LinkedIn", icon: "/icons/linkedin.png" },
+  { href: "https://share.google/hcIt2737RTlDm495k", label: "Google Maps", icon: "/icons/google-maps.png" },
+  { href: "mailto:info@sadpnepal.org", label: "Email", icon: "/icons/email.png" },
 ];
 
 export function Footer() {
@@ -21,7 +22,7 @@ export function Footer() {
           <FooterNewsletter />
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-6 md:px-16 py-20 max-w-[1280px] mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 px-6 md:px-16 py-16 max-w-[1280px] mx-auto">
         <div>
           <div className="flex items-center gap-3 mb-6">
             <Logo className="h-12 w-auto" />
@@ -29,10 +30,10 @@ export function Footer() {
               SADP<br />Nepal
             </span>
           </div>
-          <p className="text-xl text-white/70 leading-relaxed max-w-xs">
+          <p className="text-base text-white/70 leading-relaxed max-w-xs mb-6">
             Pioneering sustainable agriculture and rural empowerment in the heart of the Himalayas since 2002.
           </p>
-          <div className="flex gap-4 mt-6">
+          <div className="flex gap-4">
             {SOCIAL_LINKS.map((link) => (
               <a
                 key={link.href}
@@ -40,50 +41,52 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.label}
-                className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-brand-yellow-green hover:text-brand-primary transition-colors"
+                className="w-10 h-10 rounded-full bg-white flex items-center justify-center hover:bg-brand-yellow-green hover:border-brand-yellow-green transition-all duration-200 overflow-hidden"
               >
-                <link.icon className="size-4" />
+                <Image src={link.icon} alt={link.label} width={20} height={20} className="object-contain" />
               </a>
             ))}
-            <a
-              href="mailto:info@sadpnepal.org"
-              aria-label="Email us"
-              className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-brand-yellow-green hover:text-brand-primary transition-colors"
-            >
-              <Mail className="size-4" />
-            </a>
           </div>
         </div>
         <div>
           <h4 className="text-brand-yellow-green text-sm font-bold uppercase tracking-widest mb-6">Navigation</h4>
-          <ul className="space-y-3 text-sm text-white/80">
-            <li><Link href="/" className="hover:text-brand-yellow-green transition-colors">Home</Link></li>
-            <li><Link href="/about" className="hover:text-brand-yellow-green transition-colors">About Us</Link></li>
-            <li><Link href="/our-work" className="hover:text-brand-yellow-green transition-colors">Our Work</Link></li>
-            <li><Link href="/volunteer" className="hover:text-brand-yellow-green transition-colors">Volunteer</Link></li>
-            <li><Link href="/internship" className="hover:text-brand-yellow-green transition-colors">Internships</Link></li>
-            <li><Link href="/projects/kgecp" className="hover:text-brand-yellow-green transition-colors">KGECP</Link></li>
-            <li><Link href="/gallery" className="hover:text-brand-yellow-green transition-colors">Gallery</Link></li>
-            <li><Link href="/news" className="hover:text-brand-yellow-green transition-colors">News</Link></li>
+          <ul className="space-y-3">
+            {[
+              { href: "/", label: "Home" },
+              { href: "/about", label: "About Us" },
+              { href: "/our-work", label: "Our Work" },
+              { href: "/volunteer", label: "Volunteer" },
+              { href: "/internship", label: "Internships" },
+              { href: "/projects/kgecp", label: "KGECP" },
+              { href: "/gallery", label: "Gallery" },
+              { href: "/news", label: "News" },
+            ].map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="text-base text-white/80 hover:text-brand-yellow-green transition-colors">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
         <div>
           <h4 className="text-brand-yellow-green text-sm font-bold uppercase tracking-widest mb-6">Support</h4>
-          <ul className="space-y-3 text-sm text-white/80">
-            <li><Link href="/donate" className="hover:text-brand-yellow-green transition-colors">Donate</Link></li>
-            <li><a href="#" className="hover:text-brand-yellow-green transition-colors">Partnerships</a></li>
-            <li><Link href="/news" className="hover:text-brand-yellow-green transition-colors">News</Link></li>
-            <li><a href="#" className="hover:text-brand-yellow-green transition-colors">Privacy Policy</a></li>
+          <ul className="space-y-3">
+            <li><Link href="/donate" className="text-base text-white/80 hover:text-brand-yellow-green transition-colors">Donate</Link></li>
+            <li><Link href="/volunteer" className="text-base text-white/80 hover:text-brand-yellow-green transition-colors">Volunteer</Link></li>
+            <li><Link href="/news" className="text-base text-white/80 hover:text-brand-yellow-green transition-colors">News</Link></li>
           </ul>
         </div>
         <div>
           <h4 className="text-brand-yellow-green text-sm font-bold uppercase tracking-widest mb-6">Contact</h4>
-          <p className="text-xl text-white/80 mb-4">
-            Pokhara-15, Nayagau,<br />Kaski, Nepal
-          </p>
-          <p className="text-xl text-white/80">
-            info@sadpnepal.org<br />+977-61-432243
-          </p>
+          <div className="space-y-4">
+            <p className="text-base text-white/80">
+              Pokhara-15, Nayagau,<br />Kaski, Nepal
+            </p>
+            <p className="text-base text-white/80">
+              info@sadpnepal.org<br />+977-61-432243
+            </p>
+          </div>
         </div>
       </div>
       <div className="max-w-[1280px] mx-auto px-6 md:px-16 py-6 border-t border-white/10 text-center text-sm text-white/50">

@@ -89,8 +89,8 @@ function HeroSection() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-8">
           {homePhotos.map((photo, i) => (
-            <div key={i} className="rounded-xl overflow-hidden aspect-[4/3] relative">
-              <Image src={photo} alt="SADP Nepal" fill className="object-cover" />
+            <div key={i} className="rounded-xl overflow-hidden aspect-[4/3] relative hover:shadow-xl transition-all duration-300">
+              <Image src={photo} alt="SADP Nepal" fill className="object-cover hover:scale-105 transition-transform duration-500" />
             </div>
           ))}
         </div>
@@ -169,7 +169,7 @@ function VolunteerCallSection() {
             ].map((item, i) => {
               const Icon = item.icon;
               return (
-                <div key={i} className="bg-white rounded-xl p-6 border border-brand-outline-variant">
+                <div key={i} className="bg-white rounded-xl p-6 border border-brand-outline-variant hover:border-brand-primary/30 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                   <div className="w-10 h-10 bg-brand-yellow-green/20 rounded-lg flex items-center justify-center mb-3">
                     <Icon className="size-5 text-brand-primary" />
                   </div>
@@ -198,7 +198,7 @@ function TrainingSection() {
           </p>
         </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-brand-surface-container rounded-2xl p-8 md:p-12">
+            <div className="bg-brand-surface-container rounded-2xl p-8 md:p-12 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
               <div className="w-12 h-12 bg-brand-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <Search className="size-6 text-brand-primary" />
               </div>
@@ -207,7 +207,7 @@ function TrainingSection() {
                 We with our volunteers research the availability of four components for successful regenerative organic farming: soil, water, sunlight, and natural fertilizers. Based on findings we organize training campaigns across Nepal to offer farmers the opportunity to produce the right product out of their farms so their income gets higher. This phase also includes techniques to nurture the plant organically for more and healthier food.
               </p>
             </div>
-            <div className="bg-brand-surface-container rounded-2xl p-8 md:p-12">
+            <div className="bg-brand-surface-container rounded-2xl p-8 md:p-12 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
               <div className="w-12 h-12 bg-brand-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <Package className="size-6 text-brand-primary" />
               </div>
@@ -235,7 +235,7 @@ function RegenerativeFarmingSection() {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-10 border border-white/20">
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-10 border border-white/20 hover:bg-white/20 hover:shadow-xl transition-all duration-300">
             <div className="w-12 h-12 bg-brand-yellow-green rounded-xl flex items-center justify-center mb-4">
               <Droplets className="size-6 text-brand-primary" />
             </div>
@@ -244,7 +244,7 @@ function RegenerativeFarmingSection() {
               SADP Nepal conserves the ecology in the vicinity of farmlands. We work with local farmers and volunteers on cleaning rivers, lakes and ponds, constructing water bodies and reservoirs, planting high carbon-sinking plants like bamboo, removing invasive alien plants, and planting high-value indigenous herbal plants in forest areas.
             </p>
           </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-10 border border-white/20">
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-10 border border-white/20 hover:bg-white/20 hover:shadow-xl transition-all duration-300">
             <div className="w-12 h-12 bg-brand-yellow-green rounded-xl flex items-center justify-center mb-4">
               <Sprout className="size-6 text-brand-primary" />
             </div>
@@ -273,7 +273,7 @@ function ExpertiseSection() {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-white rounded-2xl p-8 md:p-10 border border-brand-outline-variant">
+          <div className="bg-white rounded-2xl p-8 md:p-10 border border-brand-outline-variant hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
             <div className="w-12 h-12 bg-brand-primary rounded-xl flex items-center justify-center mb-4">
               <GraduationCap className="size-6 text-brand-yellow-green" />
             </div>
@@ -282,7 +282,7 @@ function ExpertiseSection() {
               Expertise in regenerative farming refers not only to agricultural scholars with university degrees, but also to those who have worked in this area for a very long time and learned how nature works. SADP Nepal provides opportunities to work with both kinds of experts.
             </p>
           </div>
-          <div className="bg-white rounded-2xl p-8 md:p-10 border border-brand-outline-variant">
+          <div className="bg-white rounded-2xl p-8 md:p-10 border border-brand-outline-variant hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
             <div className="w-12 h-12 bg-brand-primary rounded-xl flex items-center justify-center mb-4">
               <FlaskConical className="size-6 text-brand-yellow-green" />
             </div>

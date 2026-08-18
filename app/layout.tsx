@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Gabarito, Montserrat } from "next/font/google";
+import { Poppins, Montserrat } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 
-const gabarito = Gabarito({
+const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-gabarito",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins",
   display: "swap",
 });
 
@@ -39,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${gabarito.variable} ${montserrat.variable}`}>
+    <html lang="en" className={`${poppins.variable} ${montserrat.variable}`}>
       <head>
         <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
       </head>

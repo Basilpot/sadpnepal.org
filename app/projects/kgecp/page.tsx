@@ -9,7 +9,6 @@ export const metadata = {
 };
 
 const HERO_BG = CONSERVATION_PHOTOS[0];
-const inlinePhotos = [CONSERVATION_PHOTOS[5], CONSERVATION_PHOTOS[8], CONSERVATION_PHOTOS[9], CONSERVATION_PHOTOS[11]];
 
 export default function KGECPPage() {
   return (
@@ -74,13 +73,6 @@ export default function KGECPPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-            {inlinePhotos.slice(0, 3).map((photo, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden aspect-[4/3] relative">
-                <Image src={photo} alt="Kalikhola project area" fill className="object-cover" />
-              </div>
-            ))}
-          </div>
 
           <div className="max-w-4xl mx-auto mb-20">
             <div className="bg-brand-surface-container rounded-2xl p-8 md:p-12 border border-brand-outline-variant mb-8">
@@ -147,14 +139,6 @@ export default function KGECPPage() {
                 );
               })}
             </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
-            {inlinePhotos.slice(3, 5).map((photo, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden aspect-[16/9] relative">
-                <Image src={photo} alt="Kalikhola project" fill className="object-cover" />
-              </div>
-            ))}
           </div>
 
           <div className="max-w-4xl mx-auto mb-20">

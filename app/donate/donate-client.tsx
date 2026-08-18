@@ -9,12 +9,16 @@ import { submitForm } from "@/lib/submit-form";
 
 const HERO_IMAGE = COMMUNITY_PHOTOS[0];
 
+const PRESET_AMOUNTS = [50, 100, 250, 500, 600];
+
 export default function DonateClient() {
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState("");
   const [donorStatus, setDonorStatus] = useState<"idle" | "success" | "error">("idle");
   const [newsletterStatus, setNewsletterStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
+  const [customAmount, setCustomAmount] = useState(false);
 
   const handleDonorSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -182,17 +186,49 @@ export default function DonateClient() {
               />
             </div>
             <div>
-              <label htmlFor="amount" className="block text-sm font-bold uppercase tracking-widest text-brand-on-surface-variant mb-2">
-                Amount (USD)
+              <label className="block text-sm font-bold uppercase tracking-widest text-brand-on-surface-variant mb-3">
+                Donation Amount (USD)
               </label>
-              <input
-                id="amount"
-                name="amount"
-                type="number"
-                min={1}
-                className="w-full px-4 py-4 rounded-xl border border-brand-outline-variant bg-white text-brand-primary focus:outline-none focus:border-brand-primary"
-                placeholder="Enter amount"
-              />
+              <div className="grid grid-cols-3 gap-2 mb-3">
+                {PRESET_AMOUNTS.map((amt) => (
+                  <button
+                    key={amt}
+                    type="button"
+                    onClick={() => { setSelectedAmount(amt); setCustomAmount(false); }}
+                    className={`py-3 rounded-xl text-sm font-bold border-2 transition-all duration-200 ${
+                      selectedAmount === amt && !customAmount
+                        ? "border-brand-primary bg-brand-primary text-white"
+                        : "border-brand-outline-variant bg-white text-brand-primary hover:border-brand-primary/50"
+                    }`}
+                  >
+                    ${amt}
+                  </button>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => { setCustomAmount(true); setSelectedAmount(null); }}
+                  className={`py-3 rounded-xl text-sm font-bold border-2 transition-all duration-200 ${
+                    customAmount
+                      ? "border-brand-primary bg-brand-primary text-white"
+                      : "border-brand-outline-variant bg-white text-brand-primary hover:border-brand-primary/50"
+                  }`}
+                >
+                  Custom
+                </button>
+              </div>
+              {customAmount && (
+                <input
+                  id="amount"
+                  name="amount"
+                  type="number"
+                  min={1}
+                  className="w-full px-4 py-4 rounded-xl border border-brand-outline-variant bg-white text-brand-primary focus:outline-none focus:border-brand-primary"
+                  placeholder="Enter amount"
+                />
+              )}
+              {!customAmount && selectedAmount && (
+                <input type="hidden" name="amount" value={selectedAmount} />
+              )}
             </div>
             <div>
               <label htmlFor="donor-message" className="block text-sm font-bold uppercase tracking-widest text-brand-on-surface-variant mb-2">

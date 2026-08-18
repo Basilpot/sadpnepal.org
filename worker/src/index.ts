@@ -85,7 +85,7 @@ export default {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "SADP Nepal Website <onboarding@resend.dev>",
+          from: "SADP Nepal Website <info@sadpnepal.org>",
           to: ["info@sadpnepal.org"],
           subject,
           text: body,

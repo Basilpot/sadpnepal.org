@@ -4,15 +4,76 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { Leaf, Heart, ArrowRight } from "lucide-react";
-import { getAllPhotoUrls } from "@/lib/photos";
+import {
+  CONSERVATION_PHOTOS,
+  CONSTRUCTION_PHOTOS,
+  SPIRITUAL_PHOTOS,
+  FARMING_PHOTOS,
+  COMMUNITY_PHOTOS,
+  LANDSCAPE_PHOTOS,
+  PEOPLE_PHOTOS,
+} from "@/lib/photos";
 
 const GALLERY_HERO =
   "/photos/" + encodeURIComponent("PICT0057-group-of-villagers-and-travelers-sitting-around-table-drinking-tea-outdoors.webp");
 
-const allPhotos = getAllPhotoUrls();
+type Category = "all" | "farming" | "community" | "people" | "conservation" | "construction" | "spiritual" | "landscape";
+
+const CATEGORIES: { key: Category; label: string }[] = [
+  { key: "all", label: "All Photos" },
+  { key: "farming", label: "Farming" },
+  { key: "community", label: "Community" },
+  { key: "people", label: "People" },
+  { key: "conservation", label: "Conservation" },
+  { key: "construction", label: "Construction" },
+  { key: "spiritual", label: "Spiritual" },
+  { key: "landscape", label: "Landscape" },
+];
+
+const CATEGORY_DESCRIPTIONS: Record<string, string> = {
+  farming: "Organic farming, terraced fields, and crop cultivation",
+  community: "Community meetings, gatherings, and group activities",
+  people: "Portraits and daily life of rural Nepali communities",
+  conservation: "River cleanup, environmental restoration, and ecology",
+  construction: "Traditional housing, infrastructure, and building projects",
+  spiritual: "Cultural ceremonies, blessings, and spiritual traditions",
+  landscape: "Natural beauty, mountains, and scenic views of Nepal",
+};
+
+interface PhotoItem {
+  src: string;
+  category: string;
+  label: string;
+}
+
+function buildPhotos(): PhotoItem[] {
+  const items: PhotoItem[] = [];
+  const add = (arr: string[], cat: string) => {
+    for (const src of arr) {
+      // Extract readable label from filename
+      const base = src.replace(/\.webp$/, "").split("/").pop() ?? "";
+      const slug = base.replace(/-[a-z0-9-]+\.webp$/, "").replace(/^.*?-/, "");
+      const label = (CATEGORY_DESCRIPTIONS[cat] ?? cat);
+      items.push({ src, category: cat, label });
+    }
+  };
+  add(FARMING_PHOTOS, "farming");
+  add(COMMUNITY_PHOTOS, "community");
+  add(PEOPLE_PHOTOS, "people");
+  add(CONSERVATION_PHOTOS, "conservation");
+  add(CONSTRUCTION_PHOTOS, "construction");
+  add(SPIRITUAL_PHOTOS, "spiritual");
+  add(LANDSCAPE_PHOTOS, "landscape");
+  return items;
+}
+
+const allPhotos = buildPhotos();
 
 export default function GalleryClient() {
-  const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
+  const [selectedPhoto, setSelectedPhoto] = useState<PhotoItem | null>(null);
+  const [activeCategory, setActiveCategory] = useState<Category>("all");
+
+  const filtered = activeCategory === "all" ? allPhotos : allPhotos.filter((p) => p.category === activeCategory);
 
   return (
     <main className="bg-brand-bg">
@@ -61,23 +122,48 @@ export default function GalleryClient() {
         </div>
       </section>
 
-      <section className="pb-16 px-6 md:px-16">
+      <section className="py-12 px-6 md:px-16">
         <div className="max-w-[1280px] mx-auto">
+          <div className="flex flex-wrap gap-2 mb-8">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.key}
+                onClick={() => setActiveCategory(cat.key)}
+                className={`px-4 py-2 rounded-full text-sm font-bold transition-all duration-200 ${
+                  activeCategory === cat.key
+                    ? "bg-brand-primary text-white shadow-sm"
+                    : "bg-brand-surface-container text-brand-on-surface-variant hover:bg-brand-primary/10"
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+          <p className="text-sm text-brand-outline mb-6">
+            {filtered.length} photo{filtered.length !== 1 ? "s" : ""}
+            {activeCategory !== "all" && ` in ${activeCategory}`}
+          </p>
+
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            {allPhotos.map((photo, i) => (
+            {filtered.map((photo, i) => (
               <button
                 key={i}
                 onClick={() => setSelectedPhoto(photo)}
-                className="relative overflow-hidden rounded-lg group cursor-pointer aspect-square"
+                className="relative overflow-hidden rounded-lg group cursor-pointer aspect-square bg-brand-surface-container"
               >
                 <Image
-                  src={photo}
-                  alt={`SADP Nepal photo ${i + 1}`}
+                  src={photo.src}
+                  alt={photo.label}
                   fill
                   loading="lazy"
-                  className="object-cover transition-transform duration-300 group-hover:scale-110"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-brand-primary/0 group-hover:bg-brand-primary/20 transition-colors duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-0 left-0 right-0 p-2 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <span className="text-xs font-bold text-white bg-brand-primary/80 px-2 py-1 rounded">
+                    {photo.category.charAt(0).toUpperCase() + photo.category.slice(1)}
+                  </span>
+                </div>
               </button>
             ))}
           </div>
@@ -89,7 +175,7 @@ export default function GalleryClient() {
           role="dialog"
           aria-modal="true"
           aria-label="Full size photo"
-          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black/80 flex flex-col items-center justify-center p-4"
           onClick={() => setSelectedPhoto(null)}
           onKeyDown={(e) => {
             if (e.key === "Escape") setSelectedPhoto(null);
@@ -98,12 +184,13 @@ export default function GalleryClient() {
           ref={(el) => el?.focus()}
         >
           <Image
-            src={selectedPhoto}
-            alt="Full size photo"
+            src={selectedPhoto.src}
+            alt={selectedPhoto.label}
             width={1200}
             height={800}
-            className="max-w-full max-h-[90vh] object-contain rounded-lg"
+            className="max-w-full max-h-[80vh] object-contain rounded-lg"
           />
+          <p className="text-white/80 text-sm mt-3">{selectedPhoto.label}</p>
           <button
             className="absolute top-6 right-6 text-white text-3xl font-bold w-10 h-10 flex items-center justify-center"
             aria-label="Close photo"
