@@ -26,8 +26,7 @@ interface WPPost {
 async function getPosts(): Promise<WPPost[]> {
   try {
     const res = await fetch(
-      "https://www.sadpnepal.org/wp-json/wp/v2/posts?_embed&per_page=20",
-      { next: { revalidate: 3600 } }
+      "https://blogs.sadpnepal.org/wp/wp-json/wp/v2/posts?_embed&per_page=20"
     );
     if (!res.ok) return [];
     const posts: WPPost[] = await res.json();
@@ -46,7 +45,15 @@ function formatDate(dateStr: string) {
 }
 
 function stripHtml(html: string) {
-  return html.replace(/<[^>]*>/g, "");
+  const decoded = html
+    .replace(/&hellip;/g, "...")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'")
+    .replace(/&nbsp;/g, " ");
+  return decoded.replace(/<[^>]*>/g, "");
 }
 
 export default async function NewsPage() {

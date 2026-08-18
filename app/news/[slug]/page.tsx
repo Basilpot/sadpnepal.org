@@ -26,8 +26,7 @@ interface WPPage {
 async function getAllPostSlugs(): Promise<string[]> {
   try {
     const res = await fetch(
-      "https://www.sadpnepal.org/wp-json/wp/v2/posts?_embed&per_page=20",
-      { next: { revalidate: 3600 } }
+      "https://blogs.sadpnepal.org/wp/wp-json/wp/v2/posts?_embed&per_page=20"
     );
     if (!res.ok) return [];
     const posts: WPPost[] = await res.json();
@@ -40,8 +39,7 @@ async function getAllPostSlugs(): Promise<string[]> {
 async function getPostBySlug(slug: string): Promise<WPPost | null> {
   try {
     const res = await fetch(
-      `https://www.sadpnepal.org/wp-json/wp/v2/posts?slug=${slug}&_embed`,
-      { next: { revalidate: 3600 } }
+      `https://blogs.sadpnepal.org/wp/wp-json/wp/v2/posts?slug=${slug}&_embed`
     );
     if (!res.ok) return null;
     const posts: WPPost[] = await res.json();
@@ -49,6 +47,26 @@ async function getPostBySlug(slug: string): Promise<WPPost | null> {
   } catch {
     return null;
   }
+}
+
+function rewriteMediaUrls(html: string) {
+  return html.replace(
+    /src="(https?:\/\/[^"]*?(?:sadpnepal\.org)\/[^"]*?\/wp-content\/uploads\/[^"]*?)"/gi,
+    (_match, url: string) => {
+      const uploadsIdx = url.indexOf("/wp-content/uploads/");
+      if (uploadsIdx === -1) return `src="${url}"`;
+      const uploadsPath = url.slice(uploadsIdx);
+      return `src="https://blogs.sadpnepal.org/wp${uploadsPath}"`;
+    }
+  ).replace(
+    /href="(https?:\/\/[^"]*?(?:sadpnepal\.org)\/[^"]*?\/wp-content\/uploads\/[^"]*?)"/gi,
+    (_match, url: string) => {
+      const uploadsIdx = url.indexOf("/wp-content/uploads/");
+      if (uploadsIdx === -1) return `href="${url}"`;
+      const uploadsPath = url.slice(uploadsIdx);
+      return `href="https://blogs.sadpnepal.org/wp${uploadsPath}"`;
+    }
+  );
 }
 
 function formatDate(dateStr: string) {
@@ -120,7 +138,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <div className="overflow-x-auto">
             <div
               className="prose prose-lg max-w-none prose-headings:text-brand-primary prose-headings:font-bold prose-a:text-brand-primary prose-img:rounded-xl"
-              dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+              dangerouslySetInnerHTML={{ __html: rewriteMediaUrls(post.content.rendered) }}
             />
           </div>
           <div className="mt-16 pt-8 border-t border-brand-outline-variant">

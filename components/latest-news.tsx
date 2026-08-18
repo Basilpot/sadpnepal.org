@@ -30,7 +30,7 @@ export default function LatestNews() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://www.sadpnepal.org/wp-json/wp/v2/posts?_embed&per_page=3")
+    fetch("https://blogs.sadpnepal.org/wp/wp-json/wp/v2/posts?_embed&per_page=3")
       .then((res) => res.json())
       .then((data: WPPost[]) =>
         setPosts(data.filter((p) => p.title.rendered.trim()))
