@@ -81,10 +81,10 @@ export function Footer() {
           <h4 className="text-brand-yellow-green text-sm font-bold uppercase tracking-widest mb-6">Contact</h4>
           <div className="space-y-4">
             <p className="text-base text-white/80">
-              Pokhara-15, Nayagau,<br />Kaski, Nepal
+              106 Nityananda Marg, Batulechour, Pokhara-16, Nepal
             </p>
             <p className="text-base text-white/80">
-              info@sadpnepal.org<br />+977-61-432243
+              info@sadpnepal.org<br />  061444422
             </p>
           </div>
         </div>
