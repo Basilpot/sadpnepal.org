@@ -20,6 +20,7 @@ const links = [
       { href: "/volunteer/construction", label: "Construction" },
       { href: "/volunteer/spiritual", label: "Spiritual" },
       { href: "/volunteer/student-groups", label: "Student Groups" },
+      { href: "/volunteer/homestays", label: "Homestays" },
     ],
   },
   { href: "/internship", label: "Internships" },
