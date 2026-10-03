@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
-import { Poppins, Montserrat } from "next/font/google";
+import { Livvic, Montserrat } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 
-const poppins = Poppins({
+// Livvic has no variable axis on Google Fonts, so weights are listed explicitly.
+// This is the exact set the site uses: 400 base, 500 medium, 700 bold, 900 black.
+const livvic = Livvic({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-poppins",
+  weight: ["400", "500", "700", "900"],
+  variable: "--font-livvic",
   display: "swap",
 });
 
@@ -40,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${poppins.variable} ${montserrat.variable}`}>
+    <html lang="en" className={`${livvic.variable} ${montserrat.variable}`}>
       <head>
         <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer />
       </head>

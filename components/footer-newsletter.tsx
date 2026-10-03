@@ -32,7 +32,7 @@ export function FooterNewsletter() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Your email address"
-        className="flex-1 md:w-72 px-5 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm focus:outline-none focus:border-white/40"
+        className="flex-1 md:w-72 px-5 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 text-sm focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/60"
       />
       <button
         type="submit"

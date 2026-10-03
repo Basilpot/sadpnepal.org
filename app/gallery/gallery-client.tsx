@@ -211,20 +211,20 @@ export default function GalleryClient() {
             lasting change in rural Nepal.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
+            <Link
               href="/volunteer"
               className="inline-flex items-center gap-2 bg-white text-brand-primary px-8 py-3.5 rounded-full text-sm font-bold shadow-sm hover:bg-white/90 transition-all duration-200"
             >
               <Heart size={20} />
               Become a Volunteer
-            </a>
-            <a
+            </Link>
+            <Link
               href="/donate"
               className="inline-flex items-center gap-2 border-2 border-white text-white px-8 py-3.5 rounded-full text-sm font-bold shadow-sm hover:bg-white hover:text-brand-primary transition-all duration-200"
             >
               Support Our Mission
               <ArrowRight size={20} />
-            </a>
+            </Link>
           </div>
         </div>
       </section>

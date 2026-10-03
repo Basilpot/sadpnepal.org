@@ -168,7 +168,7 @@ export default function DonateClient() {
                 name="donor-name"
                 type="text"
                 required
-                className="w-full px-4 py-4 rounded-xl border border-brand-outline-variant bg-white text-brand-primary focus:outline-none focus:border-brand-primary"
+                className="w-full px-4 py-4 rounded-xl border border-brand-outline-variant bg-white text-brand-primary focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary"
                 placeholder="Your full name"
               />
             </div>
@@ -181,7 +181,7 @@ export default function DonateClient() {
                 name="donor-email"
                 type="email"
                 required
-                className="w-full px-4 py-4 rounded-xl border border-brand-outline-variant bg-white text-brand-primary focus:outline-none focus:border-brand-primary"
+                className="w-full px-4 py-4 rounded-xl border border-brand-outline-variant bg-white text-brand-primary focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary"
                 placeholder="your@email.com"
               />
             </div>
@@ -222,7 +222,7 @@ export default function DonateClient() {
                   name="amount"
                   type="number"
                   min={1}
-                  className="w-full px-4 py-4 rounded-xl border border-brand-outline-variant bg-white text-brand-primary focus:outline-none focus:border-brand-primary"
+                  className="w-full px-4 py-4 rounded-xl border border-brand-outline-variant bg-white text-brand-primary focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary"
                   placeholder="Enter amount"
                 />
               )}
@@ -238,7 +238,7 @@ export default function DonateClient() {
                 id="donor-message"
                 name="donor-message"
                 rows={4}
-                className="w-full px-4 py-4 rounded-xl border border-brand-outline-variant bg-white text-brand-primary focus:outline-none focus:border-brand-primary resize-none"
+                className="w-full px-4 py-4 rounded-xl border border-brand-outline-variant bg-white text-brand-primary focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-primary resize-none"
                 placeholder="Leave a message..."
               />
             </div>
@@ -286,7 +286,7 @@ export default function DonateClient() {
               value={newsletterEmail}
               onChange={(e) => setNewsletterEmail(e.target.value)}
               placeholder="Enter your email"
-              className="flex-1 px-5 py-4 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-white/40"
+              className="flex-1 px-5 py-4 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-white/40 focus:ring-2 focus:ring-white/60"
             />
             <button
               type="submit"

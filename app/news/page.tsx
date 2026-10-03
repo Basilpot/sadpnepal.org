@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Calendar, ArrowRight } from "lucide-react";
 import { LANDSCAPE_PHOTOS } from "@/lib/photos";
+import { formatDate, getPosts, summary } from "@/lib/fullbleed";
 
 const HERO_IMAGE = LANDSCAPE_PHOTOS[0];
 
@@ -9,52 +10,6 @@ export const metadata: Metadata = {
   title: "News & Updates",
   description: "Latest news and updates from SADP Nepal.",
 };
-
-interface WPPost {
-  id: number;
-  slug: string;
-  title: { rendered: string };
-  excerpt: { rendered: string };
-  date: string;
-  link: string;
-  _embedded?: {
-    author?: { name: string }[];
-    "wp:term"?: { name: string; slug: string }[][];
-  };
-}
-
-async function getPosts(): Promise<WPPost[]> {
-  try {
-    const res = await fetch(
-      "https://blogs.sadpnepal.org/wp/wp-json/wp/v2/posts?_embed&per_page=20"
-    );
-    if (!res.ok) return [];
-    const posts: WPPost[] = await res.json();
-    return posts.filter((p) => p.title.rendered.trim());
-  } catch {
-    return [];
-  }
-}
-
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
-
-function stripHtml(html: string) {
-  const decoded = html
-    .replace(/&hellip;/g, "...")
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&quot;/g, '"')
-    .replace(/&#039;/g, "'")
-    .replace(/&nbsp;/g, " ");
-  return decoded.replace(/<[^>]*>/g, "");
-}
 
 export default async function NewsPage() {
   const posts = await getPosts();
@@ -88,17 +43,29 @@ export default async function NewsPage() {
       <section className="py-28">
         <div className="max-w-[1280px] mx-auto px-6 md:px-16">
           {posts.length === 0 ? (
-            <p className="text-center text-brand-outline text-xl">No news posts yet.</p>
+            <div className="text-center max-w-md mx-auto">
+              <p className="text-xl font-bold text-brand-on-surface mb-3">No news posts yet</p>
+              <p className="text-brand-on-surface-variant mb-6">
+                News and field updates will appear here. In the meantime, see what we
+                are working on.
+              </p>
+              <Link
+                href="/our-work"
+                className="inline-block border-2 border-brand-primary text-brand-primary px-8 py-3.5 rounded-full text-sm font-bold transition-colors duration-150 hover:bg-brand-primary hover:text-brand-on-primary"
+              >
+                See Our Work
+              </Link>
+            </div>
           ) : (
             <div className="max-w-4xl mx-auto space-y-8">
               {posts.map((post) => (
-                <Link key={post.id} href={`/news/${post.slug}`} className="group block bg-brand-surface-container rounded-2xl p-8 border border-brand-outline-variant hover:border-brand-primary transition-colors">
+                <Link key={post.id} href={`/news/${post.slug}`} className="group block bg-brand-surface-container rounded-2xl p-8 border border-brand-outline-variant transition-colors duration-150 hover:border-brand-primary">
                   <div className="flex items-center gap-2 text-sm text-brand-outline mb-3">
                     <Calendar className="size-4" />
-                    <span>{formatDate(post.date)}</span>
+                    <span>{formatDate(post.publishedAt)}</span>
                   </div>
-                  <h2 className="text-2xl font-bold text-brand-primary mb-3">{post.title.rendered}</h2>
-                  <p className="text-xl text-brand-on-surface-variant mb-4">{stripHtml(post.excerpt.rendered)}</p>
+                  <h2 className="text-2xl font-bold text-brand-primary mb-3">{post.title}</h2>
+                  <p className="text-xl text-brand-on-surface-variant mb-4">{summary(post)}</p>
                   <span className="inline-flex items-center gap-2 text-brand-primary text-sm font-bold group-hover:underline">
                     Read More <ArrowRight className="size-4" />
                   </span>

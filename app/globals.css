@@ -7,7 +7,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-poppins);
+  --font-sans: var(--font-livvic);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-montserrat);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -57,7 +57,7 @@
   --color-brand-secondary: #645e4b;
   --color-brand-secondary-container: #ece2c9;
   --color-brand-paper-white: #ffffff;
-  --color-brand-outline: #727970;
+  --color-brand-outline: #5f665e;
   --color-brand-outline-variant: #c1c9be;
   --color-brand-on-surface: #1b1c1c;
   --color-brand-on-surface-variant: #414941;
@@ -113,6 +113,67 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-montserrat);
     font-weight: 700;
-    line-height: 1.3;
+    line-height: 1.15;
+    text-wrap: balance;
   }
+}
+
+/* No motion is requested by the reader, so none is delivered. Tailwind gates
+   hover: behind (hover:hover) already; this covers the CSS transitions and the
+   tw-animate-css keyframes. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* @tailwindcss/typography is not installed, so prose-* utilities emit nothing.
+   This is the whole article stylesheet — CMS authors write plain HTML, so the
+   reading experience is defined here rather than by per-article classes. */
+.prose {
+  line-height: 1.65;
+  overflow-wrap: break-word;
+}
+.prose > * + * {
+  margin-block-start: 1em;
+}
+.prose h2,
+.prose h3,
+.prose h4 {
+  margin-block-start: 1.6em;
+  margin-block-end: 0.5em;
+  line-height: 1.25;
+}
+.prose a {
+  color: var(--color-brand-primary);
+  text-decoration: underline;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.15em;
+}
+.prose ul,
+.prose ol {
+  padding-inline-start: 1.5em;
+  list-style: revert;
+}
+.prose li + li {
+  margin-block-start: 0.35em;
+}
+.prose figure,
+.prose img {
+  margin-block: 1.5em;
+}
+.prose img {
+  max-width: 100%;
+  height: auto;
+}
+.prose blockquote {
+  margin-block: 1.5em;
+  padding-inline-start: 1em;
+  border-inline-start: 3px solid var(--color-brand-outline-variant);
+  color: var(--color-brand-on-surface-variant);
 }
