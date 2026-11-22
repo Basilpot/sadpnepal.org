@@ -52,14 +52,14 @@ export function Footer() {
           <h4 className="text-brand-yellow-green text-sm font-bold uppercase tracking-widest mb-6">Navigation</h4>
           <ul className="space-y-3">
             {[
-              { href: "/", label: "Home" },
               { href: "/about", label: "About Us" },
               { href: "/our-work", label: "Our Work" },
-              { href: "/volunteer", label: "Volunteer" },
-              { href: "/internship", label: "Internships" },
+              { href: "/volunteer", label: "Volunteer & Internship" },
+              { href: "/cultural-farmstays", label: "Cultural Farmstays" },
+              { href: "/horrc", label: "HORRC" },
               { href: "/projects/kgecp", label: "KGECP" },
               { href: "/gallery", label: "Gallery" },
-              { href: "/news", label: "News" },
+              { href: "/blog", label: "Blog" },
             ].map((link) => (
               <li key={link.href}>
                 <Link href={link.href} className="text-base text-white/80 hover:text-brand-yellow-green transition-colors">
@@ -74,7 +74,7 @@ export function Footer() {
           <ul className="space-y-3">
             <li><Link href="/donate" className="text-base text-white/80 hover:text-brand-yellow-green transition-colors">Donate</Link></li>
             <li><Link href="/volunteer" className="text-base text-white/80 hover:text-brand-yellow-green transition-colors">Volunteer</Link></li>
-            <li><Link href="/news" className="text-base text-white/80 hover:text-brand-yellow-green transition-colors">News</Link></li>
+            <li><Link href="/blog" className="text-base text-white/80 hover:text-brand-yellow-green transition-colors">Blog</Link></li>
           </ul>
         </div>
         <div>

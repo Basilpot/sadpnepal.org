@@ -7,7 +7,7 @@ import { COMMUNITY_PHOTOS } from "@/lib/photos";
 import { Turnstile } from "@/components/turnstile";
 import { submitForm } from "@/lib/submit-form";
 
-const HERO_IMAGE = COMMUNITY_PHOTOS[0];
+const HERO_IMAGE = COMMUNITY_PHOTOS[9];
 
 const PRESET_AMOUNTS = [50, 100, 250, 500, 600];
 

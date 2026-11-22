@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { FARMING_PHOTOS } from "@/lib/photos";
+import { LANDSCAPE_PHOTOS } from "@/lib/photos";
 
-const HERO_BG = FARMING_PHOTOS[37];
+const HERO_BG = LANDSCAPE_PHOTOS[2];
 
 export function NotFoundView() {
   return (

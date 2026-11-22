@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Target, Eye, Leaf, Sprout, Apple, Store, FlaskConical, Scale, Globe, TreePine, Users, Heart } from "lucide-react";
-import { COMMUNITY_PHOTOS, PEOPLE_PHOTOS, FARMING_PHOTOS } from "@/lib/photos";
+import { getTeam } from "@/lib/fullbleed";
+import { COMMUNITY_PHOTOS } from "@/lib/photos";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -10,10 +11,10 @@ export const metadata: Metadata = {
     "SADP Nepal — empowering marginalized farmers through sustainable agriculture since 2004.",
 };
 
-const HERO_BG = COMMUNITY_PHOTOS[0];
-const inlinePhotos = [PEOPLE_PHOTOS[0], FARMING_PHOTOS[0], COMMUNITY_PHOTOS[1]];
+const HERO_BG = COMMUNITY_PHOTOS[1];
 
-export default function About() {
+export default async function About() {
+  const team = await getTeam();
   return (
     <>
       <section className="relative min-h-[50vh] overflow-hidden bg-brand-bg">
@@ -144,18 +145,6 @@ export default function About() {
         </div>
       </section>
 
-      <section className="py-28 bg-brand-primary">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {inlinePhotos.map((photo, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden aspect-[4/3] relative">
-                <Image src={photo} alt="SADP Nepal history" fill className="object-cover" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="py-28">
         <div className="px-6 md:px-16 max-w-[1280px] mx-auto">
           <div className="max-w-4xl mx-auto">
@@ -185,6 +174,39 @@ export default function About() {
           </div>
         </div>
       </section>
+
+      {team.length > 0 && (
+        <section id="team" className="py-28 bg-brand-surface-container-low">
+          <div className="px-6 md:px-16 max-w-[1280px] mx-auto">
+            <div className="text-center mb-16">
+              <p className="text-sm font-bold uppercase tracking-widest text-brand-blushed-brick mb-4">The People</p>
+              <h2 className="text-5xl font-black text-brand-primary mb-6">
+                Our Team<span className="text-brand-blushed-brick">.</span>
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {team.map((m) => (
+                <div key={m.id} className="bg-white rounded-2xl overflow-hidden border border-brand-outline-variant">
+                  <div className="relative aspect-square bg-brand-yellow-green/20 flex items-center justify-center">
+                    {m.photo ? (
+                      <Image src={m.photo} alt={m.name} fill className="object-cover" />
+                    ) : (
+                      <span className="text-5xl font-black text-brand-primary" aria-hidden>
+                        {m.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}
+                      </span>
+                    )}
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-brand-primary">{m.name}</h3>
+                    {m.role && <p className="text-sm font-bold uppercase tracking-wider text-brand-blushed-brick mb-3">{m.role}</p>}
+                    {m.bio && <p className="text-brand-on-surface-variant">{m.bio}</p>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="py-28 px-6 md:px-16">
         <div className="bg-brand-yellow-green rounded-xl p-12 md:p-24 text-center max-w-[1280px] mx-auto relative overflow-hidden">

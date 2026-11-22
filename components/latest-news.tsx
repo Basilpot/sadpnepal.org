@@ -22,7 +22,7 @@ export default async function LatestNews() {
           {posts.map((post) => (
             <Link
               key={post.id}
-              href={`/news/${post.slug}`}
+              href={`/blog/${post.slug}`}
               aria-label={`Read more: ${post.title}`}
               className="group bg-white rounded-2xl p-8 border border-brand-outline-variant transition-colors duration-150 hover:border-brand-primary"
             >
@@ -44,10 +44,10 @@ export default async function LatestNews() {
         </div>
         <div className="text-center mt-12">
           <Link
-            href="/news"
+            href="/blog"
             className="border-2 border-brand-primary text-brand-primary px-8 py-3.5 rounded-full text-sm font-bold transition-colors duration-150 hover:bg-brand-primary hover:text-brand-on-primary inline-block"
           >
-            View All Updates
+            View All Posts
           </Link>
         </div>
       </div>

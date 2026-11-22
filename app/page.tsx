@@ -6,7 +6,7 @@ import Testimonials from "@/components/testimonials";
 import { FARMING_PHOTOS, COMMUNITY_PHOTOS, CONSERVATION_PHOTOS, PEOPLE_PHOTOS } from "@/lib/photos";
 
 const HERO_BG = FARMING_PHOTOS[37];
-const homePhotos = [FARMING_PHOTOS[0], COMMUNITY_PHOTOS[0], CONSERVATION_PHOTOS[5], PEOPLE_PHOTOS[0]];
+const homePhotos = [FARMING_PHOTOS[24], COMMUNITY_PHOTOS[3], CONSERVATION_PHOTOS[7], PEOPLE_PHOTOS[1]];
 
 function HeroSection() {
   return (
@@ -262,6 +262,63 @@ function ExpertiseSection() {
   );
 }
 
+function ExploreSection() {
+  const cards = [
+    {
+      href: "/horrc",
+      tag: "NEW",
+      title: "HORRC",
+      sub: "Himalayan Organic Research and Resource Centre",
+      body: "Our demonstration farm and learning centre in Pokhara for soil regeneration, vermicompost, biochar and organic agriculture research.",
+      image: null,
+      alt: "",
+    },
+    {
+      href: "/cultural-farmstays",
+      tag: "STAY",
+      title: "Cultural Farmstays",
+      sub: "Gurung villages, organic food, Himalayan views",
+      body: "Stay with local families and partner farms around Pokhara — authentic Nepali culture, home-grown food and eco-friendly hospitality.",
+      image: "/photos/rinje5.webp",
+      alt: "Traditional Gurung houses at Rinje farmstay",
+    },
+  ];
+  return (
+    <section className="py-28">
+      <div className="px-6 md:px-16 max-w-[1280px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {cards.map((c) => (
+            <Link
+              key={c.href}
+              href={c.href}
+              className="group bg-white rounded-2xl overflow-hidden border border-brand-outline-variant hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            >
+              <div className="relative aspect-[16/9] overflow-hidden">
+                {c.image ? (
+                  <Image src={c.image} alt={c.alt} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                ) : (
+                  <div className="absolute inset-0 bg-brand-primary flex items-center justify-center">
+                    <Sprout className="size-20 text-brand-yellow-green" aria-hidden />
+                  </div>
+                )}
+              </div>
+              <div className="p-8">
+                <span className="inline-block bg-brand-primary text-primary-foreground text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded mb-4">{c.tag}</span>
+                <h2 className="text-3xl font-black text-brand-primary mb-1">{c.title}</h2>
+                <p className="text-sm font-bold uppercase tracking-wider text-brand-blushed-brick mb-4">{c.sub}</p>
+                <p className="text-xl text-brand-on-surface-variant leading-relaxed mb-4">{c.body}</p>
+                <span className="inline-flex items-center gap-2 text-brand-primary text-sm font-bold group-hover:underline">
+                  Learn more <ArrowRight className="size-4" />
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function CTASection() {
   return (
     <section className="py-28 bg-brand-primary relative overflow-hidden">
@@ -294,6 +351,7 @@ export default function Home() {
     <>
       <HeroSection />
       <MissionSection />
+      <ExploreSection />
       <VolunteerCallSection />
       <TrainingSection />
       <RegenerativeFarmingSection />

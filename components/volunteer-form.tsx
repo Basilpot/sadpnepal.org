@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Turnstile } from "@/components/turnstile";
 import { submitForm } from "@/lib/submit-form";
+import { PROGRAMS, VOLUNTEER_OPTIONS } from "@/lib/volunteer-options";
 
 export function VolunteerForm() {
   const [token, setToken] = useState("");
@@ -13,15 +14,21 @@ export function VolunteerForm() {
     if (!token) return;
 
     const form = e.currentTarget;
+    const program = (form.elements.namedItem("program") as HTMLSelectElement).value;
+    const interests = VOLUNTEER_OPTIONS.filter(
+      (o) => (form.elements.namedItem(`interest-${o.value}`) as HTMLInputElement | null)?.checked
+    ).map((o) => o.label);
     const data = {
       name: (form.elements.namedItem("fullName") as HTMLInputElement).value,
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      subject: (form.elements.namedItem("subject") as HTMLInputElement).value || "Volunteer Application",
+      program: PROGRAMS.find((p) => p.value === program)?.label ?? program,
+      interests: interests.join(", ") || "None selected",
+      subject: (form.elements.namedItem("subject") as HTMLInputElement).value || "Volunteer / Internship Application",
       message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
     };
 
     setStatus("submitting");
-    const result = await submitForm("volunteer", token, data);
+    const result = await submitForm(program === "volunteer" ? "volunteer" : "internship", token, data);
     setStatus(result.success ? "success" : "error");
   }
 
@@ -64,6 +71,42 @@ export function VolunteerForm() {
       </div>
 
       <div>
+        <label htmlFor="program" className="block text-sm font-bold uppercase tracking-widest text-brand-on-surface-variant mb-2">
+          Program <span className="text-brand-blushed-brick">*</span>
+        </label>
+        <select
+          id="program"
+          name="program"
+          required
+          defaultValue=""
+          className="w-full px-4 py-3 rounded-lg bg-brand-surface-container-low border border-brand-outline-variant text-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary"
+        >
+          <option value="" disabled>Select a program</option>
+          {PROGRAMS.map((p) => (
+            <option key={p.value} value={p.value}>{p.label}</option>
+          ))}
+        </select>
+      </div>
+
+      <fieldset>
+        <legend className="block text-sm font-bold uppercase tracking-widest text-brand-on-surface-variant mb-3">
+          Volunteering options of interest
+        </legend>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+          {VOLUNTEER_OPTIONS.map((o) => (
+            <label key={o.value} className="flex items-center gap-3 text-brand-on-surface-variant cursor-pointer">
+              <input
+                type="checkbox"
+                name={`interest-${o.value}`}
+                className="size-4 accent-[var(--color-brand-primary)]"
+              />
+              {o.label}
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <div>
         <label htmlFor="subject" className="block text-sm font-bold uppercase tracking-widest text-brand-on-surface-variant mb-2">
           Subject
         </label>
@@ -72,7 +115,7 @@ export function VolunteerForm() {
           id="subject"
           name="subject"
           className="w-full px-4 py-3 rounded-lg bg-brand-surface-container-low border border-brand-outline-variant text-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary"
-          placeholder="Volunteer Application"
+          placeholder="Volunteer / Internship Application"
         />
       </div>
 
@@ -86,7 +129,7 @@ export function VolunteerForm() {
           rows={5}
           required
           className="w-full px-4 py-3 rounded-lg bg-brand-surface-container-low border border-brand-outline-variant text-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary"
-          placeholder="Tell us about yourself and why you want to volunteer..."
+          placeholder="Tell us about yourself and why you want to volunteer or intern..."
         />
       </div>
 

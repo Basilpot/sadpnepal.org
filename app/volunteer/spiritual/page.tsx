@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Sprout, BookOpen, Brain, Users } from "lucide-react";
 import { SPIRITUAL_PHOTOS } from "@/lib/photos";
 
@@ -9,7 +8,6 @@ export const metadata = {
 };
 
 const HERO_BG = SPIRITUAL_PHOTOS[7];
-const inlinePhotos = SPIRITUAL_PHOTOS.slice(1, 4);
 
 export default function SpiritualVolunteerPage() {
   return (
@@ -106,18 +104,6 @@ export default function SpiritualVolunteerPage() {
                 <p className="text-xl text-brand-on-surface-variant">Work with local NGOs that integrate spiritual practices into social development.</p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-28 bg-brand-primary">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {inlinePhotos.map((photo, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden aspect-[4/3] relative">
-                <Image src={photo} alt="Spiritual Nepal" fill className="object-cover" />
-              </div>
-            ))}
           </div>
         </div>
       </section>

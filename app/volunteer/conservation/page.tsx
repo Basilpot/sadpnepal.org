@@ -1,7 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Droplets, TreesIcon as Tree, ShieldCheck, Globe } from "lucide-react";
-import { CONSERVATION_PHOTOS, FARMING_PHOTOS } from "@/lib/photos";
+import { CONSERVATION_PHOTOS } from "@/lib/photos";
 
 export const metadata = {
   title: "Conservation Volunteering",
@@ -9,7 +8,6 @@ export const metadata = {
 };
 
 const HERO_BG = CONSERVATION_PHOTOS[5];
-const inlinePhotos = [CONSERVATION_PHOTOS[9], FARMING_PHOTOS[12], CONSERVATION_PHOTOS[11]];
 
 export default function ConservationVolunteerPage() {
   return (
@@ -108,18 +106,6 @@ export default function ConservationVolunteerPage() {
                 <li><strong>Food security:</strong> Healthy ecosystems ensure sustainable agriculture for future generations.</li>
               </ul>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-28 bg-brand-primary">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {inlinePhotos.map((photo, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden aspect-[4/3] relative">
-                <Image src={photo} alt="Conservation in Nepal" fill className="object-cover" />
-              </div>
-            ))}
           </div>
         </div>
       </section>

@@ -137,3 +137,30 @@ export function summary(item: ContentItem, max = 200): string {
   const text = stripHtml(item.bodyHtml);
   return text.length > max ? `${text.slice(0, max).trimEnd()}…` : text;
 }
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string | null;
+  photo: string | null;
+  bio: string;
+}
+
+/** Team members from a Fullbleed "team" collection. ponytail: the collection
+ * name and field mapping are assumed (title = name, category/metaTitle = role,
+ * coverImage = photo, bodyHtml = bio); adjust once the real schema exists.
+ * Any failure (collection missing, API down) yields [] so About hides the section. */
+export async function getTeam(): Promise<TeamMember[]> {
+  try {
+    const { data } = await api<{ data: ContentItem[] }>("/team?limit=100");
+    return data.map((m) => ({
+      id: m.id,
+      name: m.title,
+      role: m.category?.name ?? m.metaTitle ?? null,
+      photo: m.coverImage,
+      bio: summary(m, 240),
+    }));
+  } catch {
+    return [];
+  }
+}

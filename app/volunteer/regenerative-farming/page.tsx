@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { TrendingUp, Globe } from "lucide-react";
 import { FARMING_PHOTOS } from "@/lib/photos";
 
@@ -9,7 +8,6 @@ export const metadata = {
 };
 
 const HERO_BG = FARMING_PHOTOS[0];
-const inlinePhotos = FARMING_PHOTOS.slice(1, 4);
 
 export default function RegenerativeFarmingPage() {
   return (
@@ -72,14 +70,6 @@ export default function RegenerativeFarmingPage() {
                 <li>Programs offered by Sustainable Agriculture Development Program (SADP-Nepal) combine practical farm work with farmer training and education.</li>
               </ul>
             </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            {inlinePhotos.map((photo, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden aspect-[4/3] relative">
-                <Image src={photo} alt="Organic farming in Nepal" fill className="object-cover" />
-              </div>
-            ))}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">

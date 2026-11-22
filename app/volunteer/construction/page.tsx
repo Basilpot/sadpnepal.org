@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { School, Heart, Home, Warehouse } from "lucide-react";
 import { CONSTRUCTION_PHOTOS } from "@/lib/photos";
 
@@ -9,7 +8,6 @@ export const metadata = {
 };
 
 const HERO_BG = CONSTRUCTION_PHOTOS[0];
-const inlinePhotos = CONSTRUCTION_PHOTOS.slice(1, 4);
 
 export default function ConstructionVolunteerPage() {
   return (
@@ -81,14 +79,6 @@ export default function ConstructionVolunteerPage() {
                 </div>
               );
             })}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            {inlinePhotos.map((photo, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden aspect-[4/3] relative">
-                <Image src={photo} alt="Construction in Nepal" fill className="object-cover" />
-              </div>
-            ))}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

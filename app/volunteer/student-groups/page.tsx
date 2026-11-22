@@ -1,7 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Sprout, TreePine, Building, HandHeart } from "lucide-react";
-import { COMMUNITY_PHOTOS, FARMING_PHOTOS, PEOPLE_PHOTOS } from "@/lib/photos";
+import { COMMUNITY_PHOTOS } from "@/lib/photos";
 
 export const metadata = {
   title: "Student Group Volunteering",
@@ -9,7 +8,6 @@ export const metadata = {
 };
 
 const HERO_BG = COMMUNITY_PHOTOS[14];
-const inlinePhotos = [FARMING_PHOTOS[0], PEOPLE_PHOTOS[5], COMMUNITY_PHOTOS[0]];
 
 export default function StudentGroupsPage() {
   return (
@@ -99,18 +97,6 @@ export default function StudentGroupsPage() {
                 <li><strong>Broader impact:</strong> Strengthens intergenerational bonds and ensures vulnerable groups feel valued and supported.</li>
               </ul>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-28 bg-brand-primary">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {inlinePhotos.map((photo, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden aspect-[4/3] relative">
-                <Image src={photo} alt="Student volunteering in Nepal" fill className="object-cover" />
-              </div>
-            ))}
           </div>
         </div>
       </section>

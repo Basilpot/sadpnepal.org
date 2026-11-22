@@ -18,10 +18,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/volunteer/construction`, lastModified: now, changeFrequency: "yearly", priority: 0.7 },
     { url: `${BASE}/volunteer/spiritual`, lastModified: now, changeFrequency: "yearly", priority: 0.7 },
     { url: `${BASE}/volunteer/student-groups`, lastModified: now, changeFrequency: "yearly", priority: 0.7 },
-    { url: `${BASE}/internship`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${BASE}/volunteer/senior-citizens-care`, lastModified: now, changeFrequency: "yearly", priority: 0.7 },
+    { url: `${BASE}/cultural-farmstays`, lastModified: now, changeFrequency: "yearly", priority: 0.7 },
+    { url: `${BASE}/horrc`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/projects/kgecp`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/gallery`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${BASE}/news`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${BASE}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE}/donate`, lastModified: now, changeFrequency: "yearly", priority: 0.9 },
   ];
 
@@ -40,7 +42,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...staticRoutes,
     ...posts.map((post) => ({
-      url: `${BASE}/news/${post.slug}`,
+      url: `${BASE}/blog/${post.slug}`,
       lastModified: new Date(post.updatedAt),
       changeFrequency: "yearly" as const,
       priority: 0.6,
