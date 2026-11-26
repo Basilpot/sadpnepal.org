@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Sprout, FlaskConical, GraduationCap, Handshake, Recycle, Leaf, Users, Check, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -84,6 +85,21 @@ export default function HorrcPage() {
                 </Link>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16">
+        <div className="px-6 md:px-16 max-w-[1280px] mx-auto">
+          <div className="relative aspect-[3/2] md:aspect-[16/8] overflow-hidden rounded-3xl shadow-2xl">
+            <Image
+              src="/photos/horrc-house-machhapuchhre.webp"
+              alt="Traditional Nepali house with Machhapuchhre rising behind it"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 1280px"
+              className="object-cover"
+            />
           </div>
         </div>
       </section>

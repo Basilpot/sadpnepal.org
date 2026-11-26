@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Target, Eye, Leaf, Sprout, Apple, Store, FlaskConical, Scale, Globe, TreePine, Users, Heart } from "lucide-react";
-import { getTeam } from "@/lib/fullbleed";
 import { COMMUNITY_PHOTOS } from "@/lib/photos";
 
 export const metadata: Metadata = {
@@ -13,8 +12,7 @@ export const metadata: Metadata = {
 
 const HERO_BG = COMMUNITY_PHOTOS[1];
 
-export default async function About() {
-  const team = await getTeam();
+export default function About() {
   return (
     <>
       <section className="relative min-h-[50vh] overflow-hidden bg-brand-bg">
@@ -175,38 +173,35 @@ export default async function About() {
         </div>
       </section>
 
-      {team.length > 0 && (
-        <section id="team" className="py-28 bg-brand-surface-container-low">
-          <div className="px-6 md:px-16 max-w-[1280px] mx-auto">
-            <div className="text-center mb-16">
+      <section id="team" className="py-28 bg-brand-surface-container-low">
+        <div className="px-6 md:px-16 max-w-[1280px] mx-auto">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
               <p className="text-sm font-bold uppercase tracking-widest text-brand-blushed-brick mb-4">The People</p>
               <h2 className="text-5xl font-black text-brand-primary mb-6">
                 Our Team<span className="text-brand-blushed-brick">.</span>
               </h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {team.map((m) => (
-                <div key={m.id} className="bg-white rounded-2xl overflow-hidden border border-brand-outline-variant">
-                  <div className="relative aspect-square bg-brand-yellow-green/20 flex items-center justify-center">
-                    {m.photo ? (
-                      <Image src={m.photo} alt={m.name} fill className="object-cover" />
-                    ) : (
-                      <span className="text-5xl font-black text-brand-primary" aria-hidden>
-                        {m.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}
-                      </span>
-                    )}
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-brand-primary">{m.name}</h3>
-                    {m.role && <p className="text-sm font-bold uppercase tracking-wider text-brand-blushed-brick mb-3">{m.role}</p>}
-                    {m.bio && <p className="text-brand-on-surface-variant">{m.bio}</p>}
-                  </div>
-                </div>
-              ))}
+            <div className="space-y-6 text-lg md:text-xl text-brand-on-surface-variant leading-relaxed">
+              <p>
+                The strength of Himalayan Organic Research and Resource Center (HORRC) lies in its diverse team of experienced professionals, farmers, and community leaders who share a common vision for regenerative agriculture and rural development.
+              </p>
+              <p>
+                Leading the team is <strong className="text-brand-primary">Ramesh Sharma</strong>, a 71-year-old veteran of organic and regenerative farming who has dedicated more than two decades to advancing sustainable agriculture through SADP Nepal. His extensive knowledge and practical experience provide invaluable guidance to HORRC&apos;s research and field activities.
+              </p>
+              <p>
+                <strong className="text-brand-primary">Kiran Sharma and Baburam Thapa</strong> are accomplished farmers and agricultural entrepreneurs with years of hands-on experience in crop production, farm management, and rural enterprise development. Their deep understanding of local agriculture helps bridge research with practical implementation.
+              </p>
+              <p>
+                <strong className="text-brand-primary">Mohan Thapa</strong>, a respected medical professional with over thirty years of service, brings strong community connections and an exceptional understanding of Nepal&apos;s agricultural landscape and farming communities. His vast network supports collaboration and outreach efforts across the country.
+              </p>
+              <p>
+                <strong className="text-brand-primary">Jeeten Thapa</strong>, a former teacher and tourism professional, contributes his passion for research, innovation, and idea generation. His interdisciplinary perspective helps HORRC explore new opportunities that connect agriculture, conservation, tourism, and sustainable rural livelihoods.
+              </p>
             </div>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       <section className="py-28 px-6 md:px-16">
         <div className="bg-brand-yellow-green rounded-xl p-12 md:p-24 text-center max-w-[1280px] mx-auto relative overflow-hidden">
